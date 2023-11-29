@@ -1,15 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
+/*   Database.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/25 21:34:15 by sawang            #+#    #+#             */
-/*   Updated: 2023/11/29 16:14:13 by sawang           ###   ########.fr       */
+/*   Created: 2023/11/29 16:14:27 by sawang            #+#    #+#             */
+/*   Updated: 2023/11/29 16:18:24 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "BitcoinExchange.hpp"
+#pragma once
+#include <map>
+#include <iostream>
 
-static std::map<struct s_date, float> _bitcoinExchangeDatabase = Database::initDatabase();
+namespace Database
+{
+	std::map<struct s_data, float>	initDatabase(const std::string input);
+	std::map<struct s_data, float>	parseDatabase(std::string input);
+}
