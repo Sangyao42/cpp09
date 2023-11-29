@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 21:34:12 by sawang            #+#    #+#             */
-/*   Updated: 2023/11/25 22:01:19 by sawang           ###   ########.fr       */
+/*   Updated: 2023/11/29 21:18:09 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct s_date
 	int		month;
 	int		year;
 }				t_date;
+//operator overload == for struct s_date
 
 //singleton
 class BitcoinExchange
