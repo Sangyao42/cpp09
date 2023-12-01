@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 21:34:12 by sawang            #+#    #+#             */
-/*   Updated: 2023/11/29 21:18:09 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/01 18:18:16 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,12 @@ typedef struct s_date
 class BitcoinExchange
 {
 	public:
-		static	BitcoinExchange* getInstance();
-		void	applyBitcoinExchange(std::string input);
+		// static	BitcoinExchange* getInstance();
+		static Database::fileErrCode	applyBitcoinExchange(std::string infile);
 
 	private:
 		static std::map<struct s_date, float> _bitcoinExchangeDatabase;
+		static std::map<std::string, std::string> _bitcoinExchangeInput;
 
 		//orthodox canonical form
 		BitcoinExchange();
