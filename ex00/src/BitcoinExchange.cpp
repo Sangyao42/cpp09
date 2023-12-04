@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 21:34:15 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/01 18:22:58 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/04 16:35:00 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,18 @@ BitcoinExchange::~BitcoinExchange()
 {
 }
 
-Database::fileErrCode	BitcoinExchange::applyBitcoinExchange(std::string infile)
+Database::eErrCode	BitcoinExchange::applyBitcoinExchange(std::string infile)
 {
+	std::string line;
 	if (BitcoinExchange::_bitcoinExchangeDatabase.empty())
-		return (Database::fileErrCode::DATABASE_FILE_FAIL);
+		return (Database::eErrCode::DATABASE_FILE_FAIL);
 	//check input file
 	std::ifstream ifs(infile);
 	// if (!ifs)
 	// 	return (Database::fileErrCode::INPUT_FILE_FAIL);
 	BitcoinExchange::_bitcoinExchangeInput = Database::initInput(ifs);
 	if (BitcoinExchange::_bitcoinExchangeInput.empty())
-		return (Database::fileErrCode::INPUT_FILE_FAIL);
+		return (Database::eErrCode::INPUT_FILE_FAIL);
 	//check if input is valid
 	//if not return error code
 	//if valid

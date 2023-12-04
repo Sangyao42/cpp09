@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:41:30 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/01 19:43:46 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/04 22:29:03 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ std::pair<bool, std::pair<struct s_date, float>>	Database::parseDataOneLine(std:
 	Database::trimWhitespace(date);
 	Database::trimWhitespace(price);
 
-	date = Database::parseDate(date);
-	if
+	std::pair<bool, struct s_date>  = Database::parseDate(date);
+	if (date.)
 
 }
 std::map<struct s_date, float> Database::initDatabase(const std::string databaseFile)

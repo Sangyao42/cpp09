@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 21:34:12 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/01 18:18:16 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/04 15:52:00 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ class BitcoinExchange
 
 	private:
 		static std::map<struct s_date, float> _bitcoinExchangeDatabase;
-		static std::map<std::string, std::string> _bitcoinExchangeInput;
+		// static std::map<std::string, std::string> _bitcoinExchangeInput;
 
 		//orthodox canonical form
 		BitcoinExchange();

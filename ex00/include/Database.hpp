@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:14:27 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/01 19:21:12 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/04 17:19:52 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 
 namespace Database
 {
-	enum fileErrCode
+	enum eErrCode
 	{
 		DATABASE_OK,
 		DATABASE_FILE_FAIL,
@@ -43,7 +43,7 @@ namespace Database
 	std::map<std::string, std::string> initInput(std::ifstream ifs);
 	std::pair<bool, std::pair<struct s_date, float>>	parseDataOneLine(std::string line);
 	void	trimWhitespace(std::string &input);
-	std::pair<bool, struct s_data>	parseDate(std::string input);
+	std::pair<bool, struct s_date>	parseDate(std::string input);
 	std::pair<bool, float> 	parsePrice(std::string input);
 }
 
@@ -69,3 +69,21 @@ namespace Database
 // }
 
 // make_pair
+
+
+0 5 9 3
+1 4 6 10
+
+    4 6 3
+0 1 5 9 10
+
+    4 6 3
+0 1 5 9 10
+
+
+15 5 9
+4  1 8
+
+
+1 8 4
+5 9 15
