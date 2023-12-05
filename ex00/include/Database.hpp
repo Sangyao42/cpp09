@@ -6,16 +6,18 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:14:27 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/04 17:19:52 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/05 18:04:44 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#include "BitcoinExchange.hpp"
+// #include "BitcoinExchange.hpp"
 #include <map>
 #include <iostream>
+#include <time.h>
+#include <ctime>
 
-#define WHITE_SPACE " \t\n\v\f\r"
+#define DATE_FORMAT "%Y-%m-%d"
 
 // namespace Database
 // {
@@ -26,25 +28,36 @@
 
 // 	bool 	parsePrice(std::string input, float &price);
 // }
-
+enum eErrCode
+{
+	DATABASE_OK,
+	DATABASE_FILE_FAIL,
+	// DATABASE_FILE_EMPTY,
+	DATABASE_INVALID,
+	INPUT_FILE_FAIL,
+	// INPUT_FILE_EMPTY,
+};
 
 namespace Database
 {
-	enum eErrCode
-	{
-		DATABASE_OK,
-		DATABASE_FILE_FAIL,
-		// DATABASE_FILE_EMPTY,
-		DATABASE_INVALID,
-		INPUT_FILE_FAIL,
-		// INPUT_FILE_EMPTY,
-	};
-	std::map<struct s_date, float>	initDatabase(const std::string databaseFile);
-	std::map<std::string, std::string> initInput(std::ifstream ifs);
-	std::pair<bool, std::pair<struct s_date, float>>	parseDataOneLine(std::string line);
-	void	trimWhitespace(std::string &input);
-	std::pair<bool, struct s_date>	parseDate(std::string input);
-	std::pair<bool, float> 	parsePrice(std::string input);
+	//with struct s_date
+	// std::map<struct s_date, float>	initDatabase(const std::string databaseFile);
+	// std::map<std::string, std::string> initInput(std::ifstream ifs);
+	// std::pair<bool, std::pair<struct s_date, float>>	parseDataOneLine(std::string line);
+	// void	trimWhitespace(std::string &input);
+	// std::pair<bool, struct s_date>	parseDate(std::string input);
+	// std::pair<bool, float> 	parsePrice(std::string input);
+
+	//with time_t
+	// void	trimWhitespace(std::string &input);
+	std::map<time_t, float>	initDatabase(const std::string databaseFile);
+	// std::map<std::string, std::string> initInput(std::ifstream ifs);
+	std::pair<bool, std::pair<time_t, float> >	parseDataOneLine(std::string line);
+	std::pair<bool, time_t>	parseDate(std::string inputDate);
+	// bool	dateIsValid(struct tm *tmInfo);
+	std::pair<bool, float> 	parsePrice(std::string inputPrice);
+	// bool	priceIsValid(std::string inputPrice);
+	void	errPrint(eErrCode err);
 }
 
 
@@ -69,21 +82,3 @@ namespace Database
 // }
 
 // make_pair
-
-
-0 5 9 3
-1 4 6 10
-
-    4 6 3
-0 1 5 9 10
-
-    4 6 3
-0 1 5 9 10
-
-
-15 5 9
-4  1 8
-
-
-1 8 4
-5 9 15

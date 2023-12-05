@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Parser.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/25 21:34:18 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/05 17:14:44 by sawang           ###   ########.fr       */
+/*   Created: 2023/12/05 17:55:50 by sawang            #+#    #+#             */
+/*   Updated: 2023/12/05 18:41:39 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "BitcoinExchange.hpp"
-#include "Database.hpp"
+#pragma once
 #include <iostream>
+#include <time.h>
 
-int main(int argc, char **argv)
+#define WHITE_SPACE " \t\n\v\f\r"
+
+namespace Parser
 {
-	if (argc != 2)
-	{
-		std::cout << "usage: ./bitcoin [input file]" << std::endl;
-		return (1);
-	}
-	eErrCode err = BitcoinExchange::applyBitcoinExchange(argv[1]);
-	if (err != DATABASE_OK)
-		Database::errPrint(err);
-	return (err);
+	void	trimWhitespace(std::string &input);
+	bool	dateIsValid(struct tm *tmInfo);
+	bool 	isInt(std::string input);
+	bool	isFloat(std::string input);
+	bool	priceIsValid(std::string inputPrice);
 }

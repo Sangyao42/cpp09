@@ -6,20 +6,23 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 21:34:12 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/04 15:52:00 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/05 17:09:42 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
+#include "Database.hpp"
 #include <map>
 #include <iostream>
+#include <ctime>
+#include <time.h>
 
-typedef struct s_date
-{
-	int		day;
-	int		month;
-	int		year;
-}				t_date;
+// typedef struct s_date
+// {
+// 	int		day;
+// 	int		month;
+// 	int		year;
+// }				t_date;
 //operator overload == for struct s_date
 
 //singleton
@@ -27,10 +30,12 @@ class BitcoinExchange
 {
 	public:
 		// static	BitcoinExchange* getInstance();
-		static Database::fileErrCode	applyBitcoinExchange(std::string infile);
+		static eErrCode	applyBitcoinExchange(std::string infile);
 
 	private:
-		static std::map<struct s_date, float> _bitcoinExchangeDatabase;
+		// static std::map<struct s_date, float> _bitcoinExchangeDatabase;
+		static std::map<time_t, float> _bitcoinExchangeDatabase;
+
 		// static std::map<std::string, std::string> _bitcoinExchangeInput;
 
 		//orthodox canonical form
