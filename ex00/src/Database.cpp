@@ -6,12 +6,13 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:41:30 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/05 18:27:13 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/05 22:09:34 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Database.hpp"
 #include "Parser.hpp"
+#include "Input.hpp"
 #include <map>
 #include <iostream>
 #include <fstream>
@@ -94,9 +95,14 @@ std::map<time_t, float> Database::initDatabase(std::string databaseFile)
 
 	//need to check ifs here?
 	std::getline(ifs, line); //skip the first line
+	if (ifs.bad())
+	{
+		database.clear();
+		ifs.close();
+		return (database);
+	}
 	while (std::getline(ifs, line))
 	{
-		std::cout << line << std::endl;
 		size_t pos = 0;
 		if (line.empty())
 			continue ;
@@ -128,10 +134,7 @@ std::map<time_t, float> Database::initDatabase(std::string databaseFile)
 		}
 	}
 	if (ifs.bad())
-	{
 		database.clear();
-		// return ;
-	}
 	ifs.close();
 	return (database);
 }
@@ -185,3 +188,4 @@ void	Database::errPrint(eErrCode err)
 	else
 		std::cout << "Unknown error" << std::endl;
 }
+

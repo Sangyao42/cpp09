@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 21:34:12 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/05 17:09:42 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/05 22:59:33 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ class BitcoinExchange
 	public:
 		// static	BitcoinExchange* getInstance();
 		static eErrCode	applyBitcoinExchange(std::string infile);
+		static void		printExchange(time_t date, float price);
 
 	private:
 		// static std::map<struct s_date, float> _bitcoinExchangeDatabase;

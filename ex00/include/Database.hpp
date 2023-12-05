@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:14:27 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/05 18:04:44 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/05 22:58:44 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,12 @@
 // }
 enum eErrCode
 {
-	DATABASE_OK,
+	SUCCESS,
 	DATABASE_FILE_FAIL,
 	// DATABASE_FILE_EMPTY,
 	DATABASE_INVALID,
 	INPUT_FILE_FAIL,
+	INPUT_INVALID,
 	// INPUT_FILE_EMPTY,
 };
 
@@ -59,6 +60,8 @@ namespace Database
 	// bool	priceIsValid(std::string inputPrice);
 	void	errPrint(eErrCode err);
 }
+
+
 
 
 // std::pair<bool, std::pair<struct s_date, float>> f();

@@ -8,7 +8,10 @@ SRC_DIR := src
 OBJ_DIR := obj
 HEADER_DIR := include
 
-SRCS := main.cpp
+SRCS := main.cpp \
+		BitcoinExchange.cpp \
+		Database.cpp \
+		Parser.cpp
 OBJS := $(addprefix $(OBJ_DIR)/, $(SRCS:.cpp=.o))
 
 all : $(NAME)
