@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 21:34:15 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/05 23:00:28 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/06 16:11:56 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,15 @@ BitcoinExchange::~BitcoinExchange()
 eErrCode	BitcoinExchange::applyBitcoinExchange(std::string infile)
 {
 	std::string line;
-	// std::map<std::string, std::string> input;
 	std::pair<eInputErr, std::pair<std::string, float> > inputPair;
 	eErrCode err = SUCCESS;
-	struct tm tmInfo;
-	time_t date;
+	eInputErr inputErr = INPUT_OK;
 
 	if (BitcoinExchange::_bitcoinExchangeDatabase.empty())
 		return (DATABASE_FILE_FAIL);
-	//check input file
-	std::ifstream ifs(infile);
+	std::ifstream ifs(infile, std::ifstream::in);
+	if (!ifs.is_open())
+		return (INPUT_FILE_FAIL);
 	std::getline(ifs, line); //skip the first line
 	if (ifs.bad())
 	{
@@ -64,25 +63,19 @@ eErrCode	BitcoinExchange::applyBitcoinExchange(std::string infile)
 		inputPair = Input::parseInputOneLine(line);
 		if (inputPair.first != INPUT_OK)
 		{
-			Input::errPrint(inputPair.first);
-			err = INPUT_INVALID;
+			Input::errPrint(inputPair.first, line);
+			err = std::max(INPUT_INVALID, err);
 		}
 		else
 		{
-			//calculate
-			//print result
-			strptime(inputPair.second.first.c_str(), DATE_FORMAT, &tmInfo);
-			date = mktime(&tmInfo);
-			if (date < BitcoinExchange::_bitcoinExchangeDatabase.begin()->first)
+			inputErr = BitcoinExchange::calculateExchange(inputPair.second);
+			if (inputErr != INPUT_OK)
 			{
-				Input::errPrint(INPUT_DATE_TOO_EARLY);
-				err = INPUT_INVALID;
+				Input::errPrint(inputErr, line);
+				err = std::max(INPUT_INVALID, err);
 			}
 			else
-			{
-				BitcoinExchange::printExchange(date, inputPair.second.second);
-				err = SUCCESS;
-			}
+				err = std::max(SUCCESS, err);
 		}
 	}
 	if (ifs.bad())
@@ -91,4 +84,31 @@ eErrCode	BitcoinExchange::applyBitcoinExchange(std::string infile)
 		return (INPUT_FILE_FAIL);
 	}
 	return (err);
+}
+
+eInputErr	BitcoinExchange::calculateExchange(std::pair<std::string, float> inputPair)
+{
+	struct tm tmInfo;
+	time_t date;
+	float priceAfterExchange;
+
+	memset(&tmInfo, 0, sizeof(struct tm));
+	strptime(inputPair.first.c_str(), DATE_FORMAT, &tmInfo);
+	date = mktime(&tmInfo);
+	if (date < BitcoinExchange::_bitcoinExchangeDatabase.begin()->first)
+		return (INPUT_DATE_TOO_EARLY);
+	std::map<time_t, float>::iterator it = BitcoinExchange::_bitcoinExchangeDatabase.begin();
+	while (it != BitcoinExchange::_bitcoinExchangeDatabase.end() && it->first <= date)
+		it++;
+	it--;
+	priceAfterExchange = inputPair.second * it->second;
+	BitcoinExchange::printExchange(inputPair, priceAfterExchange);
+	return (INPUT_OK);
+}
+
+void	BitcoinExchange::printExchange(std::pair<std::string, float> inputPair, float priceAfterExchange)
+{
+	std::cout << inputPair.first << " => ";
+	std::cout << inputPair.second << " = ";
+	std::cout << std::fixed << std::setprecision(2) << priceAfterExchange << std::endl;
 }

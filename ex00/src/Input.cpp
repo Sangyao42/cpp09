@@ -6,13 +6,14 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 22:09:36 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/05 22:36:56 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/06 16:24:53 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Input.hpp"
 #include "Parser.hpp"
 #include "Database.hpp"
+#include "BitcoinExchange.hpp"
 
 std::pair<eInputErr, std::pair<std::string, float> >	Input::parseInputOneLine(std::string &inputLine)
 {
@@ -52,6 +53,7 @@ std::pair<eInputErr, std::string>	Input::parseDate(std::string inputDate)
 	struct tm tmInfo;
 	char *valid;
 
+	memset(&tmInfo, 0, sizeof(struct tm));
 	if (inputDate.empty())
 		return (std::make_pair(INPUT_DATE_INVALID, ""));
 	valid = strptime(inputDate.c_str(), DATE_FORMAT, &tmInfo);
@@ -64,17 +66,47 @@ std::pair<eInputErr, std::string>	Input::parseDate(std::string inputDate)
 
 std::pair<eInputErr, float>	Input::parsePrice(std::string inputPrice)
 {
-	float price;
+	double price;
 
-	if (inputPrice.empty())
-		return (std::make_pair(INPUT_PRICE_INVALID, 0));
+	// if (inputPrice.empty())
+	// 	return (std::make_pair(INPUT_PRICE_INVALID, 0));
 	if (Parser::priceIsValid(inputPrice) == false)
 		return (std::make_pair(INPUT_PRICE_INVALID, 0));
-	price = strtof(inputPrice.c_str(), NULL);
+	price = strtod(inputPrice.c_str(), NULL);
 	if (price < 0)
 		return (std::make_pair(INPUT_PRICE_NEGATIVE, 0));
 	if (price > 1000)
 		return (std::make_pair(INPUT_PRICE_TOO_LARGE, 0));
-	return (std::make_pair(INPUT_PRICE_OK, price));
+	return (std::make_pair(INPUT_PRICE_OK, static_cast<float>(price)));
 }
 
+void	Input::errPrint(eInputErr inputErr, std::string line)
+{
+	std::cout << "Error: ";
+	switch (inputErr)
+	{
+		case INPUT_LINE_EMPTY:
+			std::cout << "Input line is empty" << std::endl;
+			break;
+		case INPUT_FORMAT_INVALID:
+			std::cout << "Bad Input => " << line << std::endl;
+			break;
+		case INPUT_DATE_INVALID:
+			std::cout << "Input date is invalid" << std::endl;
+			break;
+		case INPUT_DATE_TOO_EARLY:
+			std::cout << "Input date is too early." << std::endl;
+			break;
+		case INPUT_PRICE_INVALID:
+			std::cout << "Input price is invalid." << std::endl;
+			break;
+		case INPUT_PRICE_NEGATIVE:
+			std::cout << "not a positive number." << std::endl;
+			break;
+		case INPUT_PRICE_TOO_LARGE:
+			std::cout << "too large a number." << std::endl;
+			break;
+		default:
+			break;
+	}
+}

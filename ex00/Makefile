@@ -11,7 +11,8 @@ HEADER_DIR := include
 SRCS := main.cpp \
 		BitcoinExchange.cpp \
 		Database.cpp \
-		Parser.cpp
+		Parser.cpp \
+		Input.cpp
 OBJS := $(addprefix $(OBJ_DIR)/, $(SRCS:.cpp=.o))
 
 all : $(NAME)

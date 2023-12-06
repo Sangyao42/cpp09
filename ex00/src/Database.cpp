@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:41:30 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/05 22:09:34 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/06 15:51:21 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@
 #include <fstream>
 #include <string>
 #include <limits>
+// Function to format a time_t value into a date or time string.
+// static std::string DateTime(time_t time, const char* format)
+// {
+//     char buffer[90];
+//     struct tm* timeinfo = localtime(&time);
+//     strftime(buffer, sizeof(buffer), format, timeinfo);
+//     return buffer;
+// }
 
 std::pair<bool, std::pair<time_t, float> >	Database::parseDataOneLine(std::string line)
 {
@@ -45,8 +53,10 @@ std::pair<bool, std::pair<time_t, float> >	Database::parseDataOneLine(std::strin
 		// return (std::pair<bool, std::pair<time_t, float>>(false, std::pair<time_t, float>(0, 0)));
 		return (std::make_pair(false, data));
 	}
-	data.first = date.second;
-	data.second = price.second;
+	// data.first = date.second;
+	// data.second = price.second;
+	// std::cout << "date is wrong ??" << date.second << std::endl;
+	data = std::make_pair(date.second, price.second);
 	return (std::make_pair(true, data));
 }
 
@@ -55,6 +65,7 @@ std::pair<bool, time_t>	Database::parseDate(std::string inputDate)
 	struct tm tmInfo;
 	char *valid;
 
+	memset(&tmInfo, 0, sizeof(struct tm));
 	if (inputDate.empty())
 		return (std::make_pair(false, 0));
 	valid = strptime(inputDate.c_str(), DATE_FORMAT, &tmInfo);
@@ -93,7 +104,8 @@ std::map<time_t, float> Database::initDatabase(std::string databaseFile)
 	std::map<time_t, float> database;
 	std::ifstream ifs(databaseFile.c_str(), std::ifstream::in);
 
-	//need to check ifs here?
+	if (!ifs.is_open())
+		return (database);
 	std::getline(ifs, line); //skip the first line
 	if (ifs.bad())
 	{
@@ -129,7 +141,10 @@ std::map<time_t, float> Database::initDatabase(std::string databaseFile)
 					break ;
 				}
 				else
-					database.insert(std::pair<time_t, float>(DataLine.second.first, DataLine.second.second));
+				{
+					// std::cout << "test?????" << DataLine.second.first << std::endl;
+					database.insert(std::make_pair<time_t, float>(DataLine.second.first, DataLine.second.second));
+				}
 			}
 		}
 	}
@@ -179,13 +194,22 @@ std::map<time_t, float> Database::initDatabase(std::string databaseFile)
 void	Database::errPrint(eErrCode err)
 {
 	std::cout << "Error: ";
-	if (err == DATABASE_FILE_FAIL)
+	switch (err)
+	{
+	case DATABASE_FILE_FAIL:
 		std::cout << "Database file failed to open" << std::endl;
-	else if (err == DATABASE_INVALID)
+		break;
+	case DATABASE_INVALID:
 		std::cout << "Database file is invalid" << std::endl;
-	else if (err == INPUT_FILE_FAIL)
+		break;
+	case INPUT_FILE_FAIL:
 		std::cout << "Input file failed to open" << std::endl;
-	else
-		std::cout << "Unknown error" << std::endl;
+		break;
+	case INPUT_INVALID:
+		std::cout << "Input file is invalid" << std::endl;
+		break;
+	default:
+		break;
+	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 17:58:09 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/05 18:49:48 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/06 16:05:49 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ bool	Parser::dateIsValid(struct tm *tmInfo)
 bool	Parser::isInt(std::string input)
 {
 	size_t i = 0;
+	if (input[i] == '-' || input[i] == '+')
+		i++;
 	while (isdigit(input[i]))
 		i++;
 	if (input[i])
@@ -54,6 +56,8 @@ bool	Parser::isInt(std::string input)
 bool	Parser::isFloat(std::string input)
 {
 	size_t i = 0;
+	if (input[i] == '-' || input[i] == '+')
+		i++;
 	while (isdigit(input[i]))
 		i++;
 	if (input[i] != '.')

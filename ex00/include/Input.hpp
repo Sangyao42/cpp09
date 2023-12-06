@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 22:07:58 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/05 22:22:12 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/06 16:11:41 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,7 @@ namespace Input
 	std::pair<eInputErr, std::pair<std::string, float> >	parseInputOneLine(std::string &inputLine);
 	std::pair<eInputErr, std::string>	parseDate(std::string inputDate);
 	std::pair<eInputErr, float>			parsePrice(std::string inputPrice);
-	void	errPrint(eInputErr err);
+	// eInputErr							calculateExchange(std::pair<std::string, float> inputPair);
+	// eInputErr 							printExchange(time_t date, float price);
+	void								errPrint(eInputErr inpuErr, std::string line);
 }

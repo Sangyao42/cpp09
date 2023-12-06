@@ -6,12 +6,13 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 21:34:12 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/05 22:59:33 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/06 14:13:40 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 #include "Database.hpp"
+#include "Input.hpp"
 #include <map>
 #include <iostream>
 #include <ctime>
@@ -30,8 +31,9 @@ class BitcoinExchange
 {
 	public:
 		// static	BitcoinExchange* getInstance();
-		static eErrCode	applyBitcoinExchange(std::string infile);
-		static void		printExchange(time_t date, float price);
+		static eErrCode		applyBitcoinExchange(std::string infile);
+		static eInputErr	calculateExchange(std::pair<std::string, float> inputPair);
+		static void			printExchange(std::pair<std::string, float> inputPair, float priceAfterExchange);
 
 	private:
 		// static std::map<struct s_date, float> _bitcoinExchangeDatabase;
