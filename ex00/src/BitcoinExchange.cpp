@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 21:34:15 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/06 16:11:56 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/06 22:29:31 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <fstream>
 
 std::map<time_t, float> BitcoinExchange::_bitcoinExchangeDatabase = \
-	Database::initDatabase("data.csv");
+	Database::initDatabase("testdata.csv");
 
 BitcoinExchange::BitcoinExchange()
 {
@@ -43,12 +43,12 @@ BitcoinExchange::~BitcoinExchange()
 eErrCode	BitcoinExchange::applyBitcoinExchange(std::string infile)
 {
 	std::string line;
-	std::pair<eInputErr, std::pair<std::string, float> > inputPair;
+	std::pair<eInputErr, std::pair<std::string, std::string> > inputPair;
 	eErrCode err = SUCCESS;
 	eInputErr inputErr = INPUT_OK;
 
 	if (BitcoinExchange::_bitcoinExchangeDatabase.empty())
-		return (DATABASE_FILE_FAIL);
+		return (DATABASE_INVALID);
 	std::ifstream ifs(infile, std::ifstream::in);
 	if (!ifs.is_open())
 		return (INPUT_FILE_FAIL);
@@ -57,6 +57,11 @@ eErrCode	BitcoinExchange::applyBitcoinExchange(std::string infile)
 	{
 		ifs.close();
 		return (INPUT_FILE_FAIL);
+	}
+	if (ifs.eof())
+	{
+		ifs.close();
+		return (INPUT_FILE_EMPTY);
 	}
 	while (std::getline(ifs, line))
 	{
@@ -86,7 +91,7 @@ eErrCode	BitcoinExchange::applyBitcoinExchange(std::string infile)
 	return (err);
 }
 
-eInputErr	BitcoinExchange::calculateExchange(std::pair<std::string, float> inputPair)
+eInputErr	BitcoinExchange::calculateExchange(std::pair<std::string, std::string> inputPair)
 {
 	struct tm tmInfo;
 	time_t date;
@@ -101,12 +106,12 @@ eInputErr	BitcoinExchange::calculateExchange(std::pair<std::string, float> input
 	while (it != BitcoinExchange::_bitcoinExchangeDatabase.end() && it->first <= date)
 		it++;
 	it--;
-	priceAfterExchange = inputPair.second * it->second;
+	priceAfterExchange = static_cast<float>(strtod(inputPair.second.c_str(), NULL)) * it->second;
 	BitcoinExchange::printExchange(inputPair, priceAfterExchange);
 	return (INPUT_OK);
 }
 
-void	BitcoinExchange::printExchange(std::pair<std::string, float> inputPair, float priceAfterExchange)
+void	BitcoinExchange::printExchange(std::pair<std::string, std::string> inputPair, float priceAfterExchange)
 {
 	std::cout << inputPair.first << " => ";
 	std::cout << inputPair.second << " = ";

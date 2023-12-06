@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:14:27 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/06 15:41:01 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/06 22:29:11 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@
 enum eErrCode
 {
 	SUCCESS,
-	DATABASE_FILE_FAIL,
+	// DATABASE_FILE_FAIL,
 	// DATABASE_FILE_EMPTY,
 	DATABASE_INVALID,
 	INPUT_FILE_FAIL,
 	INPUT_INVALID,
-	// INPUT_FILE_EMPTY,
+	INPUT_FILE_EMPTY,
 };
 
 namespace Database

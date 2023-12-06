@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:41:30 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/06 15:51:21 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/06 22:29:57 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,8 @@ std::map<time_t, float> Database::initDatabase(std::string databaseFile)
 	if (!ifs.is_open())
 		return (database);
 	std::getline(ifs, line); //skip the first line
-	if (ifs.bad())
+	if (ifs.bad() || ifs.eof())
 	{
-		database.clear();
 		ifs.close();
 		return (database);
 	}
@@ -141,10 +140,7 @@ std::map<time_t, float> Database::initDatabase(std::string databaseFile)
 					break ;
 				}
 				else
-				{
-					// std::cout << "test?????" << DataLine.second.first << std::endl;
 					database.insert(std::make_pair<time_t, float>(DataLine.second.first, DataLine.second.second));
-				}
 			}
 		}
 	}
@@ -196,9 +192,9 @@ void	Database::errPrint(eErrCode err)
 	std::cout << "Error: ";
 	switch (err)
 	{
-	case DATABASE_FILE_FAIL:
-		std::cout << "Database file failed to open" << std::endl;
-		break;
+	// case DATABASE_FILE_FAIL:
+	// 	std::cout << "Database file failed to open" << std::endl;
+	// 	break;
 	case DATABASE_INVALID:
 		std::cout << "Database file is invalid" << std::endl;
 		break;

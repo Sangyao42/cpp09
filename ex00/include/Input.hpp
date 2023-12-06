@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 22:07:58 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/06 16:11:41 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/06 22:23:43 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ enum eInputErr
 
 namespace Input
 {
-	std::pair<eInputErr, std::pair<std::string, float> >	parseInputOneLine(std::string &inputLine);
+	std::pair<eInputErr, std::pair<std::string, std::string> >	parseInputOneLine(std::string &inputLine);
 	std::pair<eInputErr, std::string>	parseDate(std::string inputDate);
-	std::pair<eInputErr, float>			parsePrice(std::string inputPrice);
+	std::pair<eInputErr, std::string>			parsePrice(std::string inputPrice);
 	// eInputErr							calculateExchange(std::pair<std::string, float> inputPair);
 	// eInputErr 							printExchange(time_t date, float price);
 	void								errPrint(eInputErr inpuErr, std::string line);
