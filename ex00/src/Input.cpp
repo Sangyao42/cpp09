@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 22:09:36 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/07 13:33:24 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/07 13:55:08 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,7 @@ std::pair<eInputErr, std::string>	Input::parseDate(std::string inputDate)
 std::pair<eInputErr, std::string>	Input::parsePrice(std::string inputPrice)
 {
 	double price;
-
-	// if (inputPrice.empty())
-	// 	return (std::make_pair(INPUT_PRICE_INVALID, 0));
+	
 	if (Parser::priceIsValid(inputPrice) == false)
 		return (std::make_pair(INPUT_PRICE_INVALID, ""));
 	price = strtod(inputPrice.c_str(), NULL);
@@ -95,13 +93,13 @@ void	Input::errPrint(eInputErr inputErr, std::string line)
 			std::cout << "Bad Input => " << line << std::endl;
 			break;
 		case INPUT_DATE_INVALID:
-			std::cout << "Input date is invalid" << std::endl;
+			std::cout << "Bad Input => " << line << std::endl;
 			break;
 		case INPUT_DATE_TOO_EARLY:
 			std::cout << "Input date is too early." << std::endl;
 			break;
 		case INPUT_PRICE_INVALID:
-			std::cout << "Input price is invalid." << std::endl;
+			std::cout << "Bad Input => " << line << std::endl;
 			break;
 		case INPUT_PRICE_NEGATIVE:
 			std::cout << "not a positive number." << std::endl;

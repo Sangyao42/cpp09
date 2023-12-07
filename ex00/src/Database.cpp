@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:41:30 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/07 13:32:36 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/07 13:51:05 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,14 @@ std::pair<bool, std::pair<time_t, float> >	Database::parseDataOneLine(std::strin
 	if (date.first == false)
 	{
 		data = std::make_pair(0, 0);
-		// return (std::pair<bool, std::pair<time_t, float>>(false, std::pair<time_t, float>(0, 0)));
 		return (std::make_pair(false, data));
 	}
 	std::pair<bool, float> price = Database::parsePrice(inputPrice);
 	if (price.first == false)
 	{
 		data = std::make_pair(0, 0);
-		// return (std::pair<bool, std::pair<time_t, float>>(false, std::pair<time_t, float>(0, 0)));
 		return (std::make_pair(false, data));
 	}
-	// data.first = date.second;
-	// data.second = price.second;
-	// std::cout << "date is wrong ??" << date.second << std::endl;
 	data = std::make_pair(date.second, price.second);
 	return (std::make_pair(true, data));
 }
@@ -103,7 +98,6 @@ std::map<time_t, float> Database::initDatabase(std::string databaseFile)
 	{
 		Database::errPrint(DATABASE_FILE_FAIL);
 		exit(DATABASE_FILE_FAIL);
-		// return (database);
 	}
 	std::getline(ifs, line); //skip the first line
 	if (ifs.bad())
@@ -111,14 +105,12 @@ std::map<time_t, float> Database::initDatabase(std::string databaseFile)
 		ifs.close();
 		Database::errPrint(DATABASE_FILE_FAIL);
 		exit(DATABASE_FILE_FAIL);
-		// return (database);
 	}
 	if (ifs.eof())
 	{
 		ifs.close();
 		Database::errPrint(DATABASE_FILE_EMPTY);
 		exit(DATABASE_FILE_EMPTY);
-		// return (database);
 	}
 	while (std::getline(ifs, line))
 	{
@@ -162,43 +154,6 @@ std::map<time_t, float> Database::initDatabase(std::string databaseFile)
 	ifs.close();
 	return (database);
 }
-
-// std::map<std::string, std::string> Database::initInput(std::ifstream ifs)
-// {
-// 	std::string line;
-// 	std::map<std::string, std::string> input;
-// 	// std::ifstream ifs(infile, std::ifstream::in);
-
-// 	while (std::getline(ifs, line))
-// 	{
-// 		size_t pos = 0;
-// 		std::string s1;
-// 		std::string s2;
-// 		if (line.empty())
-// 			input.insert(std::pair<std::string, std::string>("", ""));
-// 		else
-// 		{
-// 			pos = line.find("|");
-// 			if (pos == std::string::npos)
-// 			{
-// 				Parser::trimWhitespace(line);
-// 				input.insert(std::pair<std::string, std::string>(line, ""));
-// 			}
-// 			else
-// 			{
-// 				s1 = line.substr(0, pos);
-// 				s2 = line.substr(pos + 1);
-// 				Parser::trimWhitespace(s1);
-// 				Parser::trimWhitespace(s2);
-// 				input.insert(std::pair<std::string, std::string>(s1, s2));
-// 			}
-// 		}
-// 	}
-// 	if (ifs.bad())
-// 		return (input);
-// 	ifs.close();
-
-// }
 
 void	Database::errPrint(eErrCode err)
 {

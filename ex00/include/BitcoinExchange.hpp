@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 21:34:12 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/06 21:48:01 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/07 13:48:10 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,6 @@
 #include <ctime>
 #include <time.h>
 
-// typedef struct s_date
-// {
-// 	int		day;
-// 	int		month;
-// 	int		year;
-// }				t_date;
-//operator overload == for struct s_date
-
 //singleton
 class BitcoinExchange
 {
@@ -36,10 +28,7 @@ class BitcoinExchange
 		static void			printExchange(std::pair<std::string, std::string> inputPair, float priceAfterExchange);
 
 	private:
-		// static std::map<struct s_date, float> _bitcoinExchangeDatabase;
 		static std::map<time_t, float> _bitcoinExchangeDatabase;
-
-		// static std::map<std::string, std::string> _bitcoinExchangeInput;
 
 		//orthodox canonical form
 		BitcoinExchange();
