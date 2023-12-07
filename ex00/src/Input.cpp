@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 22:09:36 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/06 21:47:10 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/07 13:33:24 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 #include "Parser.hpp"
 #include "Database.hpp"
 #include "BitcoinExchange.hpp"
+#include <cstring>
+#include <cstdlib>
+
 
 std::pair<eInputErr, std::pair<std::string, std::string> >	Input::parseInputOneLine(std::string &inputLine)
 {

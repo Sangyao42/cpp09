@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 21:34:15 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/06 22:29:31 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/07 13:36:37 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <fstream>
 
 std::map<time_t, float> BitcoinExchange::_bitcoinExchangeDatabase = \
-	Database::initDatabase("testdata.csv");
+	Database::initDatabase("data.csv");
 
 BitcoinExchange::BitcoinExchange()
 {
@@ -49,7 +49,7 @@ eErrCode	BitcoinExchange::applyBitcoinExchange(std::string infile)
 
 	if (BitcoinExchange::_bitcoinExchangeDatabase.empty())
 		return (DATABASE_INVALID);
-	std::ifstream ifs(infile, std::ifstream::in);
+	std::ifstream ifs(infile.c_str(), std::ifstream::in);
 	if (!ifs.is_open())
 		return (INPUT_FILE_FAIL);
 	std::getline(ifs, line); //skip the first line
@@ -104,8 +104,10 @@ eInputErr	BitcoinExchange::calculateExchange(std::pair<std::string, std::string>
 		return (INPUT_DATE_TOO_EARLY);
 	std::map<time_t, float>::iterator it = BitcoinExchange::_bitcoinExchangeDatabase.begin();
 	while (it != BitcoinExchange::_bitcoinExchangeDatabase.end() && it->first <= date)
+	{
 		it++;
-	it--;
+	}
+	--it;
 	priceAfterExchange = static_cast<float>(strtod(inputPair.second.c_str(), NULL)) * it->second;
 	BitcoinExchange::printExchange(inputPair, priceAfterExchange);
 	return (INPUT_OK);
