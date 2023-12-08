@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Calculator.hpp                                     :+:      :+:    :+:   */
+/*   RPN.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 16:07:15 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/08 16:18:32 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/08 20:47:17 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "Parser.hpp"
 #include <iostream>
 
-namespace Calculator
+namespace RPN
 {
 	void	calcRPN(std::string input);
 	float	calcOperation(int a, int b, char op);

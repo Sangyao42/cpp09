@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Calculator.cpp                                     :+:      :+:    :+:   */
+/*   RPN.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 16:06:53 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/08 16:54:11 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/08 20:47:59 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Calculator.hpp"
+#include "RPN.hpp"
 #include "Parser.hpp"
 #include <stack>
 #include <ctype.h>
 #include <limits>
 
-bool	Calculator::resultIsValid(float result)
+bool	RPN::resultIsValid(float result)
 {
 	if (result > std::numeric_limits<int>::max() || \
 		result < std::numeric_limits<int>::min())
@@ -24,7 +24,7 @@ bool	Calculator::resultIsValid(float result)
 	return (true);
 }
 
-float	Calculator::calcOperation(int lhs, int rhs, char op)
+float	RPN::calcOperation(int lhs, int rhs, char op)
 {
 	std::string opArray= "+-*/";
 	float result;
@@ -43,19 +43,19 @@ float	Calculator::calcOperation(int lhs, int rhs, char op)
 			break;
 		case 3:
 			if (rhs == 0)
-				throw Calculator::CalculationUndefinedException();
+				throw RPN::CalculationUndefinedException();
 			result = lhs / rhs;
 			break;
 		default:
-			throw Calculator::CalculationUndefinedException();
+			throw RPN::CalculationUndefinedException();
 	}
 	if (resultIsValid(result))
 		return (result);
 	else
-		throw Calculator::ResultOutOfRangeException();
+		throw RPN::ResultOutOfRangeException();
 }
 
-void	Calculator::calcRPN(std::string input)
+void	RPN::calcRPN(std::string input)
 {
 	std::stack<int>	stack;
 	long			result;
@@ -94,17 +94,17 @@ void	Calculator::calcRPN(std::string input)
 	std::cout << stack.top() << std::endl;
 }
 
-const char* Calculator::ResultOutOfRangeException::what() const throw()
+const char* RPN::ResultOutOfRangeException::what() const throw()
 {
 	return ("Error: Result is out of range");
 }
 
-const char* Calculator::CalculationUndefinedException::what() const throw()
+const char* RPN::CalculationUndefinedException::what() const throw()
 {
 	return ("Error: Calculation is undefined");
 }
 
-const char* Calculator::ResultIsNotValidException::what() const throw()
+const char* RPN::ResultIsNotValidException::what() const throw()
 {
 	return ("Error: Result is not valid");
 }
