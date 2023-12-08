@@ -6,18 +6,19 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 16:08:06 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/07 16:34:09 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/08 16:35:14 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 #include <iostream>
 
-#define WHITE_SPACE " \t\n\v\f\r"
-
 namespace Parser
 {
-	bool	isNumber(char c);
 	bool	isOperator(char c);
-	bool	parseRPN(std::string input);
+	class ParserException : public std::exception
+	{
+		public:
+			virtual const char* what() const throw();
+	};
 };
