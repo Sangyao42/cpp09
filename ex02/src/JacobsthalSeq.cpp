@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 13:39:21 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/13 16:03:08 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/13 23:00:09 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ size_t	PmergeMe::jacobsthal(int n)
 	return (jacobsthal(n - 1) + 2 * jacobsthal(n - 2));
 }
 
+//vector
 void	PmergeMe::genJacobSeqVec()
 {
 	int jacobsIdx = 3;
@@ -44,8 +45,6 @@ void	PmergeMe::genPosVec()
 	while (i < _jacobSeqVec.size())
 	{
 		indexToStart = _jacobSeqVec[i];
-		// _posVec.push_back(indexToStart);
-		// --indexToStart;
 		while (indexToStart > lastIndexToStart)
 		{
 			_posVec.push_back(indexToStart);
@@ -55,11 +54,42 @@ void	PmergeMe::genPosVec()
 		i++;
 	}
 	while (lastIndexToStart < _pairVec.size())
-	{
 		_posVec.push_back(++lastIndexToStart);
-		// lastIndexToStart++;
-	}
-	std::cout << "posVec inside: ";
-	for (size_t i = 0; i < _posVec.size(); i++)
-		std::cout << _posVec[i] << " ";
 }
+
+//list
+void	PmergeMe::genJacobSeqList()
+{
+	int jacobsIdx = 3;
+	int size = _pairList.size();
+	int indexToStart;
+
+	while ((indexToStart = jacobsthal(jacobsIdx)) <= size)
+	{
+		_jacobSeqList.push_back(indexToStart);
+		jacobsIdx++;
+	}
+}
+
+void	PmergeMe::genPosList()
+{
+	size_t indexToStart;
+	size_t lastIndexToStart = 1;
+
+	genJacobSeqList();
+	for (std::list<int>::iterator it = _jacobSeqList.begin(); it != _jacobSeqList.end(); it++)
+	{
+		indexToStart = *it;
+		while (indexToStart > lastIndexToStart)
+		{
+			_posList.push_back(indexToStart);
+			--indexToStart;
+		}
+		lastIndexToStart = *it;
+	}
+	while (lastIndexToStart < _pairList.size())
+		_posList.push_back(++lastIndexToStart);
+}
+
+
+

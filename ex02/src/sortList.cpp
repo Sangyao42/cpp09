@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   List.cpp                                           :+:      :+:    :+:   */
+/*   sortList.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 13:36:08 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/13 13:36:11 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/13 22:59:35 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,55 @@ void	PmergeMe::mergeSortList(pairlist &_pairList)
 	_pairList.merge(rightList);
 }
 
+int	PmergeMe::binarySearchList(int value, size_t endPos)
+{
+	int start = 0;
+	int end = endPos;
+	int mid;
+	int numToCompare;
+	std::list<int>::iterator it;
+	while (start <= end)
+	{
+		mid = (start + end) / 2;
+		it = _resultList.begin();
+		std::advance(it, mid);
+		numToCompare = *it;
+		if (value > numToCompare)
+			start = mid + 1;
+		else if (value < numToCompare)
+			end = mid - 1;
+		else
+			return mid;
+	}
+	it = _resultList.begin();
+	std::advance(it, mid);
+	numToCompare = *it;
+	if (value > numToCompare)
+		return (mid + 1);
+	else
+		return (mid);
+	return (-1);
+}
 void	PmergeMe::insertionSortList()
 {
-	return ;
+	int pos;
+
+	genPosList();
+	_resultList.push_back(_pairList.front().first);
+	int value;
+	int addedCount = 0;
+	size_t endIdx;
+	for (std::list<int>::iterator it = _posList.begin(); it != _posList.end(); it++)
+	{
+		pairlist_it pairIt = _pairList.begin();
+		std::advance(pairIt, *it - 1);
+		value = pairIt->first;
+		endIdx = *it + addedCount;
+		pos = binarySearchList(value, endIdx);
+		std::list<int>::iterator resultIt = _resultList.begin();
+		std::advance(resultIt, pos);
+		_resultList.insert(resultIt, value);
+	}
 }
 
 void	PmergeMe::mergeInsertionSortList()

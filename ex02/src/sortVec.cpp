@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 13:41:39 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/13 22:15:32 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/13 22:51:31 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,6 @@ int	PmergeMe::binarySearchVec(int value, size_t endPos)
 	else
 		return (mid);
 	return (-1);
-
 }
 
 void	PmergeMe::insertionSortVec()
@@ -156,12 +155,12 @@ void	PmergeMe::insertionSortVec()
 	// for (std::vector<int>::iterator it = vec.begin(); it != vec.end(); it++)
 	// 	std::cout << *it << " ";
 
-	this->genPosVec();
+	genPosVec();
 	// std::cout << "posVec: ";
 	// for (std::vector<int>::iterator it = _posVec.begin(); it != _posVec.end(); it++)
 	// 	std::cout << *it << " ";
 	// std::cout << std::endl;
-	_resultVec.insert(_resultVec.begin(), _pairVec[0].first);
+	_resultVec.push_back(_pairVec[0].first);
 	int addedCount = 0;
 	int value;
 	size_t	endIdx;
@@ -173,7 +172,7 @@ void	PmergeMe::insertionSortVec()
 		_resultVec.insert(_resultVec.begin() + pos, value);
 		addedCount++;
 	}
-	//for odd number
+	//for odd number, binary search needed!!!!
 	if (_oddNum != 0)
 	{
 		pos = 0;

@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 22:28:05 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/13 22:13:31 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/13 23:00:25 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,16 @@ void	PmergeMe::printCompare()
 	std::cout << std::endl;
 
 	//list
-	// std::cout << "Before: ";
-	// for (int i = 0; i < _numC; i++)
-	// 	std::cout << atoi(_input[i]) << " ";
-	// std::cout << std::endl;
-	// double timeList = sortList();
-	// std::cout << "After: ";
-	// for (std::list<int>::iterator it = _resultList.begin(); it != _resultList.end(); it++)
-	// 	std::cout << *it << " ";
+	std::cout << "Before: ";
+	for (int i = 0; i < _numC; i++)
+		std::cout << atoi(_input[i]) << " ";
+	std::cout << std::endl;
+	double timeList = sortList();
+	std::cout << "After: ";
+	for (std::list<int>::iterator it = _resultList.begin(); it != _resultList.end(); it++)
+		std::cout << *it << " ";
 	if (isSortedList(_resultList) == false)
 		std::cout << "List NOT SORTED" << std::endl;
 	std::cout << "Time for vector: " << timeVec << std::endl;
-	// std::cout << "Time for list: " << timeList << std::endl;
+	std::cout << "Time for list: " << timeList << std::endl;
 }
