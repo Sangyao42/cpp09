@@ -40,8 +40,8 @@ void	PmergeMe::makePairList()
 		std::pair<int, int> pair;
 		num1 = atoi(_input[i]);
 		num2 = atoi(_input[_numC / 2 + i]);
-		pair.first = std::min(num1, num2);
-		pair.second = std::max(num1, num2);
+		pair.first = std::max(num1, num2);
+		pair.second = std::min(num1, num2);
 		_pairList.push_back(pair);
 	}
 }
@@ -102,7 +102,7 @@ void	PmergeMe::insertionSortList()
 	int pos;
 
 	genPosList();
-	_resultList.push_back(_pairList.front().first);
+	_resultList.insert(_resultList.begin(), _pairList.front().second);
 	int value;
 	int addedCount = 0;
 	size_t endIdx;
@@ -110,12 +110,20 @@ void	PmergeMe::insertionSortList()
 	{
 		pairlist_it pairIt = _pairList.begin();
 		std::advance(pairIt, *it - 1);
-		value = pairIt->first;
+		value = pairIt->second;
 		endIdx = *it + addedCount;
 		pos = binarySearchList(value, endIdx);
 		std::list<int>::iterator resultIt = _resultList.begin();
 		std::advance(resultIt, pos);
 		_resultList.insert(resultIt, value);
+		addedCount++;
+	}
+	if (_oddNum != 0)
+	{
+		pos = binarySearchList(_oddNum, _resultList.size() - 1);
+		std::list<int>::iterator resultIt = _resultList.begin();
+		std::advance(resultIt, pos);
+		_resultList.insert(resultIt, _oddNum);
 	}
 }
 
@@ -123,20 +131,18 @@ void	PmergeMe::mergeInsertionSortList()
 {
 	mergeSortList(_pairList);
 	//test printing
-	std::cout << "pairs: " << std::endl;
-	pairlist_it testIt = _pairList.begin();
-	for (; testIt != _pairList.end(); testIt++)
-		std::cout << testIt->first << " ";
-	std::cout << std::endl;
-	testIt = _pairList.begin();
-	for (; testIt != _pairList.end(); testIt++)
-		std::cout << testIt->second << " ";
-	std::cout << std::endl;
+	// std::cout << "pairs: " << std::endl;
+	// for (pairlist_it testIt = _pairList.begin() ; testIt != _pairList.end(); testIt++)
+	// 	std::cout << testIt->second << " ";
+	// std::cout << std::endl;
+	// for (pairlist_it testIt = _pairList.begin(); testIt != _pairList.end(); testIt++)
+	// 	std::cout << testIt->first << " ";
+	// std::cout << std::endl;
 	//end test printing
 	pairlist_it it = _pairList.begin();
 	while (it != _pairList.end())
 	{
-		_resultList.push_back(it->second);
+		_resultList.push_back(it->first);
 		it++;
 	}
 	insertionSortList();

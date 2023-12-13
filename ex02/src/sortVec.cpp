@@ -45,13 +45,6 @@ void	PmergeMe::makePairVec()
 		pair.second = std::max(num1, num2);
 		_pairVec.push_back(pair);
 	}
-	// std::cout << "_oddNum: " << _oddNum << std::endl;
-	// std::vector <std::pair<int, int> >::iterator it = _pairVec.begin();
-	// while (it != _pairVec.end())
-	// {
-	// 	std::cout << it->first << " " << it->second << std::endl;
-	// 	it++;
-	// }
 }
 
 static void	pairVecEqual(std::pair<int, int> &pair1, std::pair<int, int> &pair2)
@@ -137,30 +130,9 @@ int	PmergeMe::binarySearchVec(int value, size_t endPos)
 void	PmergeMe::insertionSortVec()
 {
 	int pos;
-	// // _resultVec.insert(_resultVec.begin(), _pairVec[0].first);
-	// for (pairvec::size_type i = 0; i < _pairVec.size(); i++)
-	// {
-	// 	pos = 0;
-	// 	for (pairvec::size_type j = 0; j < (2 * i); j++)
-	// 	{
-	// 		if (_pairVec[i].first > _resultVec[j])
-	// 			pos++;
-	// 	}
-	// 	_resultVec.insert(_resultVec.begin() + pos, _pairVec[i].first);
-	// }
-
-	// _jacobVec = Jacobsthal<std::vector<int> >(_pairVec.size());
-	// std::cout << '\n' << "positionsVec: ";
-	// std::vector<int> vec = _jacobVec.getPositions();
-	// for (std::vector<int>::iterator it = vec.begin(); it != vec.end(); it++)
-	// 	std::cout << *it << " ";
 
 	genPosVec();
-	// std::cout << "posVec: ";
-	// for (std::vector<int>::iterator it = _posVec.begin(); it != _posVec.end(); it++)
-	// 	std::cout << *it << " ";
-	// std::cout << std::endl;
-	_resultVec.push_back(_pairVec[0].first);
+	_resultVec.insert(_resultVec.begin(), _pairVec[0].first);
 	int addedCount = 0;
 	int value;
 	size_t	endIdx;
@@ -172,15 +144,10 @@ void	PmergeMe::insertionSortVec()
 		_resultVec.insert(_resultVec.begin() + pos, value);
 		addedCount++;
 	}
-	//for odd number, binary search needed!!!!
+	//for odd number
 	if (_oddNum != 0)
 	{
-		pos = 0;
-		for (pairvec::size_type j = 0; j < _resultVec.size(); j++)
-		{
-			if (_oddNum > _resultVec[j])
-				pos++;
-		}
+		pos = binarySearchVec(_oddNum, _resultVec.size() - 1);
 		_resultVec.insert(_resultVec.begin() + pos, _oddNum);
 	}
 }

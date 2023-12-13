@@ -13,6 +13,7 @@
 #include "Parser.hpp"
 #include <iostream>
 #include <cstdlib>
+#include <climits>
 
 bool	Parser::isValid(char **arg)
 {

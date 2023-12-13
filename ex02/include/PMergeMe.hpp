@@ -14,6 +14,7 @@
 #include "Parser.hpp"
 // #include "Jacobsthal.hpp"
 #include <iostream>
+#include <stdlib.h>
 #include <vector>
 #include <list>
 
