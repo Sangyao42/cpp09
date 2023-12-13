@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 13:41:39 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/13 16:15:26 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/13 22:15:32 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,29 @@ void	PmergeMe::mergeSortVec(pairvec &_pairVec, const int begin, const int end)
 	mergeVec(_pairVec, begin, mid, end);
 }
 
+int	PmergeMe::binarySearchVec(int value, size_t endPos)
+{
+	int start = 0;
+	int end = endPos;
+	int mid;
+	while (start <= end)
+	{
+		mid = (start + end) / 2;
+		if (value > _resultVec[mid])
+			start = mid + 1;
+		else if (value < _resultVec[mid])
+			end = mid - 1;
+		else
+			return mid;
+	}
+	if (value > _resultVec[mid])
+		return (mid + 1);
+	else
+		return (mid);
+	return (-1);
+
+}
+
 void	PmergeMe::insertionSortVec()
 {
 	int pos;
@@ -138,14 +161,16 @@ void	PmergeMe::insertionSortVec()
 	// for (std::vector<int>::iterator it = _posVec.begin(); it != _posVec.end(); it++)
 	// 	std::cout << *it << " ";
 	// std::cout << std::endl;
+	_resultVec.insert(_resultVec.begin(), _pairVec[0].first);
 	int addedCount = 0;
 	int value;
-	size_t	endPos;
+	size_t	endIdx;
 	for (std::vector<int>::iterator it = _posVec.begin(); it != _posVec.end(); it++)
 	{
 		value = _pairVec[*it - 1].first;
-		// endPos = *it + addedCount;
-		// pos = binarySearchVec(_resultVec, value, 0,  endPos);
+		endIdx = *it + addedCount;
+		pos = binarySearchVec(value, endIdx);
+		_resultVec.insert(_resultVec.begin() + pos, value);
 		addedCount++;
 	}
 	//for odd number
@@ -164,15 +189,14 @@ void	PmergeMe::insertionSortVec()
 void	PmergeMe::mergeInsertionSortVec()
 {
 	mergeSortVec(_pairVec, 0, _pairVec.size() - 1);
-	std::cout << "pairs: " << std::endl;
-	for (pairvec::size_type i = 0; i < _pairVec.size(); i++)
-		std::cout << _pairVec[i].first << " ";
-	std::cout << std::endl;
-	for (pairvec::size_type i = 0; i < _pairVec.size(); i++)
-		std::cout << _pairVec[i].second << " ";
-	std::cout << std::endl;
+	// std::cout << "pairs: " << std::endl;
+	// for (pairvec::size_type i = 0; i < _pairVec.size(); i++)
+	// 	std::cout << _pairVec[i].first << " ";
+	// std::cout << std::endl;
+	// for (pairvec::size_type i = 0; i < _pairVec.size(); i++)
+	// 	std::cout << _pairVec[i].second << " ";
+	// std::cout << std::endl;
 	for (pairvec::size_type i = 0; i < _pairVec.size(); i++)
 		_resultVec.push_back(_pairVec[i].second);
-	//insertion sort here
 	insertionSortVec();
 }

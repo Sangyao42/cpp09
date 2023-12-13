@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 21:02:15 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/13 13:52:10 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/13 22:16:32 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,12 @@ class PmergeMe
 		//jacobsthal && position vector
 		void	genJacobSeqVec();
 		void	genPosVec();
+		int		binarySearchVec(int value, size_t endPos);
 
 		//jacobsthal && position list
 		void	genJacobSeqList();
 		void	genPosList();
+		int		binarySearchList(int value, size_t endPos);
 
 		// jacobsthal getters
 		// std::vector<int>	getJacobSeqVec() const;
