@@ -1,6 +1,6 @@
 NAME := PmergeMe
 CC := c++
-CPPFLAGS := -std=c++98 -Wall -Wextra -Werror
+CPPFLAGS := -std=c++98 -Wall -Wextra -Werror -fsanitize=address
 CPPFLAGS += -fsanitize=address
 # DIRECTIVRS := -D TEST
 
@@ -11,7 +11,9 @@ HEADER_DIR := include
 SRCS := main.cpp \
 		Parser.cpp \
 		PmergeMe.cpp \
-		List.cpp
+		sortVec.cpp \
+		sortList.cpp \
+		JacobsthalSeq.cpp
 OBJS := $(addprefix $(OBJ_DIR)/, $(SRCS:.cpp=.o))
 
 all : $(NAME)

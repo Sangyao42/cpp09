@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   List.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/13 13:36:08 by sawang            #+#    #+#             */
+/*   Updated: 2023/12/13 13:36:11 by sawang           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "PmergeMe.hpp"
 
 //list
@@ -54,61 +66,7 @@ void	PmergeMe::mergeSortList(pairlist &_pairList)
 	_pairList.clear();
 	_pairList.merge(leftList);
 	_pairList.merge(rightList);
-
 }
-// void	PmergeMe::mergeList(pairlist &_pairList, const pairlist_it left, const pairlist_it mid, const pairlist_it end)
-// {
-// 	pairlist_it leftEnd = mid;
-// 	++leftEnd;
-// 	pairlist_it rightEnd = end;
-// 	++rightEnd;
-// 	pairlist leftList(left, leftEnd);
-// 	pairlist rightList(leftEnd, rightEnd);
-
-// 	pairlist_it leftIt = leftList.begin();
-// 	pairlist_it rightIt = rightList.begin();
-// 	// pairlist_it resultIt = left;
-// 	pairlist_it resultIt = leftList.begin();
-// 	while (leftIt != leftList.end() && rightIt != rightList.end())
-// 	{
-// 		if (leftIt->second <= rightIt->second)
-// 		{
-// 			*resultIt = *leftIt;
-// 			leftIt++;
-// 		}
-// 		else
-// 		{
-// 			*resultIt = *rightIt;
-// 			rightIt++;
-// 		}
-// 		resultIt++;
-// 	}
-// 	while (leftIt != leftList.end())
-// 	{
-// 		*resultIt = *leftIt;
-// 		leftIt++;
-// 		resultIt++;
-// 	}
-// 	while (leftIt != leftList.end())
-// 	{
-// 		*resultIt = *rightIt;
-// 		rightIt++;
-// 		resultIt++;
-// 	}
-// }
-
-// void	PmergeMe::mergeSortList(pairlist &_pairList, const pairlist_it begin, const pairlist_it end)
-// {
-// 	if (begin == end)
-// 		return ;
-// 	pairlist_it mid = begin;
-// 	std::advance(mid, std::distance(begin, end) / 2); //calculate mid
-// 	mergeSortList(_pairList, begin, mid);
-// 	pairlist_it mid2 = mid;
-// 	std::advance(mid2, 1); //get next element after mid
-// 	mergeSortList(_pairList, mid2, end);
-// 	mergeList(_pairList, begin, mid, end);
-// }
 
 void	PmergeMe::insertionSortList()
 {
