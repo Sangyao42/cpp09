@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 16:06:53 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/08 20:47:59 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/14 14:38:33 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,4 @@ const char* RPN::ResultOutOfRangeException::what() const throw()
 const char* RPN::CalculationUndefinedException::what() const throw()
 {
 	return ("Error: Calculation is undefined");
-}
-
-const char* RPN::ResultIsNotValidException::what() const throw()
-{
-	return ("Error: Result is not valid");
 }
