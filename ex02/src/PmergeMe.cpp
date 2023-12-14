@@ -82,6 +82,6 @@ void	PmergeMe::printCompare()
 		std::cout << *it << " ";
 	if (isSortedList(_resultList) == false)
 		std::cout << "List NOT SORTED" << std::endl;
-	std::cout << "Time for vector: " << timeVec << std::endl;
-	std::cout << "Time for list: " << timeList << std::endl;
+	std::cout << "Time to process a range of " << _numC << " elements with std::vector : " << timeVec << " us"<< std::endl;
+	std::cout << "Time to process a range of " << _numC << " elements with std::list : " << timeList << " us"<< std::endl;
 }

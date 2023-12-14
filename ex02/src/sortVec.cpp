@@ -24,7 +24,7 @@ double	PmergeMe::sortVec()
 	else
 		mergeInsertionSortVec();
 	end = clock();
-	timeInterval = (double)(end - start) / CLOCKS_PER_SEC; //microseconds
+	timeInterval = (double)(end - start) / CLOCKS_PER_SEC * 1000000; //microseconds
 	return (timeInterval);
 }
 
