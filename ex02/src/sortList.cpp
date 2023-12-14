@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 13:36:08 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/13 22:59:35 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/14 14:00:23 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,29 @@ double PmergeMe::sortList()
 	else
 		mergeInsertionSortList();
 	end = clock();
-	timeInterval = (double)(end - start) / CLOCKS_PER_SEC * 1000000; //microseconds
+	timeInterval = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000; //milliseconds
 	return (timeInterval);
+}
+
+void	PmergeMe::mergeInsertionSortList()
+{
+	mergeSortList(_pairList);
+	//test printing
+	// std::cout << "pairs: " << std::endl;
+	// for (pairlist_it testIt = _pairList.begin() ; testIt != _pairList.end(); testIt++)
+	// 	std::cout << testIt->second << " ";
+	// std::cout << std::endl;
+	// for (pairlist_it testIt = _pairList.begin(); testIt != _pairList.end(); testIt++)
+	// 	std::cout << testIt->first << " ";
+	// std::cout << std::endl;
+	//end test printing
+	pairlist_it it = _pairList.begin();
+	while (it != _pairList.end())
+	{
+		_resultList.push_back(it->first);
+		it++;
+	}
+	insertionSortList();
 }
 
 void	PmergeMe::makePairList()
@@ -150,25 +171,4 @@ void	PmergeMe::insertionSortList()
 		std::advance(resultIt, pos);
 		_resultList.insert(resultIt, _oddNum);
 	}
-}
-
-void	PmergeMe::mergeInsertionSortList()
-{
-	mergeSortList(_pairList);
-	//test printing
-	// std::cout << "pairs: " << std::endl;
-	// for (pairlist_it testIt = _pairList.begin() ; testIt != _pairList.end(); testIt++)
-	// 	std::cout << testIt->second << " ";
-	// std::cout << std::endl;
-	// for (pairlist_it testIt = _pairList.begin(); testIt != _pairList.end(); testIt++)
-	// 	std::cout << testIt->first << " ";
-	// std::cout << std::endl;
-	//end test printing
-	pairlist_it it = _pairList.begin();
-	while (it != _pairList.end())
-	{
-		_resultList.push_back(it->first);
-		it++;
-	}
-	insertionSortList();
 }

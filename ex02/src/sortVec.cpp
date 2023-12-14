@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 13:41:39 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/13 22:51:31 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/14 13:59:16 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,23 @@ double	PmergeMe::sortVec()
 	else
 		mergeInsertionSortVec();
 	end = clock();
-	timeInterval = (double)(end - start) / CLOCKS_PER_SEC * 1000000; //microseconds
+	timeInterval = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000; //milliseconds
 	return (timeInterval);
+}
+
+void	PmergeMe::mergeInsertionSortVec()
+{
+	mergeSortVec(_pairVec, 0, _pairVec.size() - 1);
+	// std::cout << "pairs: " << std::endl;
+	// for (pairvec::size_type i = 0; i < _pairVec.size(); i++)
+	// 	std::cout << _pairVec[i].first << " ";
+	// std::cout << std::endl;
+	// for (pairvec::size_type i = 0; i < _pairVec.size(); i++)
+	// 	std::cout << _pairVec[i].second << " ";
+	// std::cout << std::endl;
+	for (pairvec::size_type i = 0; i < _pairVec.size(); i++)
+		_resultVec.push_back(_pairVec[i].second);
+	insertionSortVec();
 }
 
 void	PmergeMe::makePairVec()
@@ -150,19 +165,4 @@ void	PmergeMe::insertionSortVec()
 		pos = binarySearchVec(_oddNum, _resultVec.size() - 1);
 		_resultVec.insert(_resultVec.begin() + pos, _oddNum);
 	}
-}
-
-void	PmergeMe::mergeInsertionSortVec()
-{
-	mergeSortVec(_pairVec, 0, _pairVec.size() - 1);
-	// std::cout << "pairs: " << std::endl;
-	// for (pairvec::size_type i = 0; i < _pairVec.size(); i++)
-	// 	std::cout << _pairVec[i].first << " ";
-	// std::cout << std::endl;
-	// for (pairvec::size_type i = 0; i < _pairVec.size(); i++)
-	// 	std::cout << _pairVec[i].second << " ";
-	// std::cout << std::endl;
-	for (pairvec::size_type i = 0; i < _pairVec.size(); i++)
-		_resultVec.push_back(_pairVec[i].second);
-	insertionSortVec();
 }
