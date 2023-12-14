@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:41:30 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/07 13:51:05 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/14 14:23:20 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,12 @@ std::map<time_t, float> Database::initDatabase(std::string databaseFile)
 		ifs.close();
 		Database::errPrint(DATABASE_FILE_EMPTY);
 		exit(DATABASE_FILE_EMPTY);
+	}
+	if (line != "date,exchange_rate")
+	{
+		ifs.close();
+		Database::errPrint(DATABASE_INVALID);
+		exit(DATABASE_INVALID);
 	}
 	while (std::getline(ifs, line))
 	{

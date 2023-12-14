@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 21:34:15 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/07 13:36:37 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/14 14:22:25 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,11 @@ eErrCode	BitcoinExchange::applyBitcoinExchange(std::string infile)
 	{
 		ifs.close();
 		return (INPUT_FILE_EMPTY);
+	}
+	if (line != "date | value")
+	{
+		ifs.close();
+		return (DATABASE_INVALID);
 	}
 	while (std::getline(ifs, line))
 	{
