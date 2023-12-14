@@ -64,8 +64,8 @@ void	PmergeMe::mergeSortList(pairlist &_pairList)
 
 	//clear the original list and merge the sublists left and right back into it
 	_pairList.clear();
-	_pairList.merge(leftList);
-	_pairList.merge(rightList);
+	// _pairList.merge(leftList);
+	// _pairList.merge(rightList);
 	pairlist_it leftIt = leftList.begin();
 	pairlist_it rightIt = rightList.begin();
 	while (leftIt != leftList.end() && rightIt != rightList.end())
