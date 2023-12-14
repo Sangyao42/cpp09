@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 16:07:15 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/08 20:47:17 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/14 14:38:27 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,6 @@ namespace RPN
 	bool	resultIsValid(float result);
 
 	class ResultOutOfRangeException : public std::exception
-	{
-		public:
-			virtual const char* what() const throw();
-	};
-
-	class ResultIsNotValidException : public std::exception
 	{
 		public:
 			virtual const char* what() const throw();

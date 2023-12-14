@@ -10,7 +10,7 @@ HEADER_DIR := include
 
 SRCS := main.cpp \
 		Parser.cpp \
-		Calculator.cpp
+		RPN.cpp
 OBJS := $(addprefix $(OBJ_DIR)/, $(SRCS:.cpp=.o))
 
 all : $(NAME)
