@@ -66,6 +66,31 @@ void	PmergeMe::mergeSortList(pairlist &_pairList)
 	_pairList.clear();
 	_pairList.merge(leftList);
 	_pairList.merge(rightList);
+	pairlist_it leftIt = leftList.begin();
+	pairlist_it rightIt = rightList.begin();
+	while (leftIt != leftList.end() && rightIt != rightList.end())
+	{
+		if (leftIt->first < rightIt->first)
+		{
+			_pairList.push_back(*leftIt);
+			leftIt++;
+		}
+		else
+		{
+			_pairList.push_back(*rightIt);
+			rightIt++;
+		}
+	}
+	while (leftIt != leftList.end())
+	{
+		_pairList.push_back(*leftIt);
+		leftIt++;
+	}
+	while (rightIt != rightList.end())
+	{
+		_pairList.push_back(*rightIt);
+		rightIt++;
+	}
 }
 
 int	PmergeMe::binarySearchList(int value, size_t endPos)
