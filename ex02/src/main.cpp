@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 22:14:19 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/10 20:48:41 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/14 13:56:01 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ int main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	PmergeMe pmergeMe(argc - 1, argv);
 	pmergeMe.printCompare();
-	return (0);
+	return (EXIT_SUCCESS);
 }
