@@ -6,11 +6,12 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 16:03:37 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/14 14:32:59 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/17 17:58:18 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RPN.hpp"
+#include <cstdlib>
 
 int		main(int argc, char **argv)
 {

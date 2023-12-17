@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 21:34:12 by sawang            #+#    #+#             */
-/*   Updated: 2023/12/07 13:48:10 by sawang           ###   ########.fr       */
+/*   Updated: 2023/12/17 17:56:19 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 #include <iostream>
 #include <ctime>
 #include <time.h>
+#include <cstring>
+#include <stdlib.h>
+#include <iomanip>
 
 //singleton
 class BitcoinExchange
